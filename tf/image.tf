@@ -3,6 +3,7 @@ resource "openstack_images_image_v2" "vgcn-image" {
   image_source_url = var.image["image_source_url"]
   container_format = var.image["container_format"]
   disk_format      = var.image["disk_format"]
+  count            = (var.exec_node_count == 0) ? 0 : 1
 }
 
 // Upload virtual machine GPU image via API
@@ -12,4 +13,5 @@ resource "openstack_images_image_v2" "vgcn-image-gpu" {
   image_source_url = var.gpu_image["image_source_url"]
   container_format = var.gpu_image["container_format"]
   disk_format      = var.gpu_image["disk_format"]
+  count            = (var.gpu_node_count == 0) ? 0 : 1
 }
